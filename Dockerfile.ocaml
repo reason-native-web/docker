@@ -1,0 +1,21 @@
+FROM reasonnative/esy:0.6.2
+
+ARG OCAML_VERSION=4.9.0
+
+ENV TERM=dumb LD_LIBRARY_PATH=/usr/local/lib:/usr/lib:/lib
+
+RUN mkdir /tmp/app
+WORKDIR /tmp/app
+
+RUN echo ' \
+    {\
+    "name": "package-base", \
+    "dependencies": { \
+    "ocaml": "~'"$OCAML_VERSION"'" \
+    } \
+    } \
+    ' > esy.json
+
+RUN cat esy.json
+
+RUN esy
