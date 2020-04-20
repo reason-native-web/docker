@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        ESY_VERSION: ['0.6.2']
+        ESY_VERSION: ['0.6.2', '0.6.4']
         OCAML_VERSION: ['4.7.1', '4.8.1', '4.9.0']  
     steps:
       - uses: actions/checkout@v2

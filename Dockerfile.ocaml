@@ -1,4 +1,4 @@
-FROM reasonnative/esy:0.6.2
+FROM reasonnative/esy:0.6.4
 
 ARG OCAML_VERSION=4.9.0
 
