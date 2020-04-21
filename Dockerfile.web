@@ -1,5 +1,8 @@
 ARG OCAML_VERSION=4.9.0
 FROM reasonnative/ocaml:$OCAML_VERSION
+
+LABEL maintainer "Ulrik Strid <ulrik.strid@outlook.com>"
+
 ARG OCAML_VERSION=4.9.0
 
 ENV TERM=dumb LD_LIBRARY_PATH=/usr/local/lib:/usr/lib:/lib

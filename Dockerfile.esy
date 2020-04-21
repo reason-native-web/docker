@@ -1,5 +1,8 @@
 # start from node image so we can install esy from npm
 FROM node:12-alpine as build
+
+LABEL maintainer "Ulrik Strid <ulrik.strid@outlook.com>"
+
 ARG ESY_VERSION=0.6.4
 
 ENV TERM=dumb LD_LIBRARY_PATH=/usr/local/lib:/usr/lib:/lib
