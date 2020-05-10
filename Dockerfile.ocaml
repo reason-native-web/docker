@@ -2,7 +2,7 @@ FROM reasonnative/esy:0.6.4
 
 LABEL maintainer "Ulrik Strid <ulrik.strid@outlook.com>"
 
-ARG OCAML_VERSION=4.9.0
+ARG OCAML_VERSION=4.9.1
 
 ENV TERM=dumb LD_LIBRARY_PATH=/usr/local/lib:/usr/lib:/lib
 

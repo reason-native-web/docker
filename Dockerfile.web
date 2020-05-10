@@ -1,9 +1,9 @@
-ARG OCAML_VERSION=4.9.0
+ARG OCAML_VERSION=4.9.1
 FROM reasonnative/ocaml:$OCAML_VERSION
 
 LABEL maintainer "Ulrik Strid <ulrik.strid@outlook.com>"
 
-ARG OCAML_VERSION=4.9.0
+ARG OCAML_VERSION=4.9.1
 
 ENV TERM=dumb LD_LIBRARY_PATH=/usr/local/lib:/usr/lib:/lib
 
@@ -13,7 +13,7 @@ RUN echo ' \
     "dependencies": { \
     "ocaml": "~'"$OCAML_VERSION"'", \
     "@opam/dune": ">= 2.0.0", \
-    "@reason-native-web/morph_server_http": "^0.3.5" \
+    "@reason-native-web/morph": "^0.4.0" \
     } \
     } \
     ' > esy.json
