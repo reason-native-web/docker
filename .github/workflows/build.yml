@@ -5,11 +5,25 @@ on:
       - master
 
 jobs:
-  build-and-deploy:
+  build-and-deploy-esy:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        ESY_VERSION: ['0.6.4']
+        ESY_VERSION: ['0.6.2', '0.6.4']
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Build esy image
+        run: |
+          docker login --username ${{ secrets.DOCKER_USERNAME }} --password ${{ secrets.DOCKER_PASSWORD }}
+          docker build --rm -f "Dockerfile.esy" --build-arg ESY_VERSION=${{ matrix.ESY_VERSION }} -t reasonnative/esy:${{ matrix.ESY_VERSION }} "."
+          docker push reasonnative/esy:${{ matrix.ESY_VERSION }}
+          docker logout
+  build-and-deploy:
+    needs: build-and-deploy-esy
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
         OCAML_VERSION: ['4.8.1', '4.9.0', '4.9.1', '4.10.0']  
     steps:
       - uses: actions/checkout@v2
@@ -17,5 +31,5 @@ jobs:
       - name: Build esy image
         run: |
           docker login --username ${{ secrets.DOCKER_USERNAME }} --password ${{ secrets.DOCKER_PASSWORD }}
-          ./build-and-push.sh ${{ matrix.ESY_VERSION }} ${{ matrix.OCAML_VERSION }}
+          ./build-and-push.sh ${{ matrix.OCAML_VERSION }}
           docker logout
