@@ -18,6 +18,6 @@ RUN echo ' \
     } \
     ' > esy.json
 
-RUN cat esy.json
+RUN esy install
 
-RUN esy
+RUN esy build --release
