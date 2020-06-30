@@ -1,6 +1,9 @@
 name: Build and Publish to Docker Hub
 on: [push]
 
+env:
+  DOCKER_BUILDKIT: 1
+
 jobs:
   build-and-deploy-esy:
     runs-on: ubuntu-latest
@@ -8,20 +11,16 @@ jobs:
       matrix:
         ESY_VERSION: ['0.6.2', '0.6.4']
     steps:
-      - name: Stupid
-        run: |
-          sudo chown -R $(whoami):$(id -ng) /var/lib/docker
-      - name: Cache multiple paths
-        uses: actions/cache@v2
-        with:
-          path: |
-            /var/lib/docker
-          key: ${{ runner.os }}-test3
+      - name: Cache docker
+        uses: actions/cache@v1
+      j with:
+          path: ${{ runner.temp }}/docker_cache
+          key: test-1
+      - name: Restore docker
+        run: ./.github/actions/docker-cache/restore.sh ${{ runner.temp }}/docker_cache/cache.tar
       - uses: actions/checkout@v2
-      
       - name: Build esy image
         run: |
-          DOCKER_BUILDKIT=1 docker build --rm -f "Dockerfile.esy" --build-arg ESY_VERSION=${{ matrix.ESY_VERSION }} -t reasonnative/esy:${{ matrix.ESY_VERSION }} "."
-      - name: Stupid 2
-        run: |
-          sudo chown -R $(whoami):$(id -ng) /var/lib/docker
+          docker build --rm -f "Dockerfile.esy" --build-arg ESY_VERSION=${{ matrix.ESY_VERSION }} -t reasonnative/esy:${{ matrix.ESY_VERSION }} "."
+      - name: Backup docker
+        run: ./.github/actions/docker-cache/backup.sh ${{ runner.temp }}/docker_cache/cache.tar
