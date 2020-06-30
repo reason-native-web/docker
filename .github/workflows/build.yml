@@ -22,5 +22,5 @@ jobs:
       - name: Move docker cache
         run: |
           # This is stupid
-          sudo chmod -R 777 ~/docker-cache
           sudo mv /var/lib/docker ~/docker-cache
+          sudo chmod -R 777 ~/docker-cache
