@@ -7,20 +7,17 @@ env:
 jobs:
   build-and-deploy-esy:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        ESY_VERSION: ['0.6.2', '0.6.4']
     steps:
       - name: Cache docker
         uses: actions/cache@v2
         with:
           path: ${{ runner.temp }}/docker_cache
-          key: test-4
+          key: test-5
       - uses: actions/checkout@v2
       - name: Restore docker
         run: ./.github/actions/docker-cache/restore.sh ${{ runner.temp }}/docker_cache/cache.tar
       - name: Build esy image
         run: |
-          docker build --rm -f "Dockerfile.esy" --build-arg ESY_VERSION=${{ matrix.ESY_VERSION }} -t reasonnative/esy:${{ matrix.ESY_VERSION }} "."
+          docker build --rm -f "Dockerfile.ocaml" -t reasonnative/esy:${{ matrix.ESY_VERSION }} "."
       - name: Backup docker
         run: ./.github/actions/docker-cache/backup.sh ${{ runner.temp }}/docker_cache/cache.tar
