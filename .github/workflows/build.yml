@@ -15,8 +15,8 @@ jobs:
         uses: actions/cache@v2
         with:
           path: |
-            ~/docker-cache
-          key: ${{ runner.os }}-test1
+            /var/lib/docker
+          key: ${{ runner.os }}-test2
       - uses: actions/checkout@v2
       
       - name: Build esy image
