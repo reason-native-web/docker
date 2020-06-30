@@ -13,7 +13,7 @@ jobs:
         with:
           path: |
             ~/docker-cache
-          key: ${{ runner.os }}-${{ hashFiles('Dockerfile.esy') }}
+          key: ${{ runner.os }}-test1
       - uses: actions/checkout@v2
       
       - name: Build esy image
