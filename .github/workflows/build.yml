@@ -21,4 +21,6 @@ jobs:
           DOCKER_BUILDKIT=1 docker build --rm -f "Dockerfile.esy" --build-arg ESY_VERSION=${{ matrix.ESY_VERSION }} -t reasonnative/esy:${{ matrix.ESY_VERSION }} "."
       - name: Move docker cache
         run: |
+          # This is stupid
+          sudo chmod -R 777 ~/docker-cache
           sudo mv /var/lib/docker ~/docker-cache
