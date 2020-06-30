@@ -12,10 +12,10 @@ jobs:
         ESY_VERSION: ['0.6.2', '0.6.4']
     steps:
       - name: Cache docker
-        uses: actions/cache@v1
-      j with:
+        uses: actions/cache@v2
+       with:
           path: ${{ runner.temp }}/docker_cache
-          key: test-1
+          key: test-4
       - name: Restore docker
         run: ./.github/actions/docker-cache/restore.sh ${{ runner.temp }}/docker_cache/cache.tar
       - uses: actions/checkout@v2
