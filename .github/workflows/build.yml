@@ -16,9 +16,9 @@ jobs:
         with:
           path: ${{ runner.temp }}/docker_cache
           key: test-4
+      - uses: actions/checkout@v2
       - name: Restore docker
         run: ./.github/actions/docker-cache/restore.sh ${{ runner.temp }}/docker_cache/cache.tar
-      - uses: actions/checkout@v2
       - name: Build esy image
         run: |
           docker build --rm -f "Dockerfile.esy" --build-arg ESY_VERSION=${{ matrix.ESY_VERSION }} -t reasonnative/esy:${{ matrix.ESY_VERSION }} "."
