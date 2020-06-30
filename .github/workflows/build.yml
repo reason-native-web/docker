@@ -18,6 +18,6 @@ jobs:
         run: ./.github/actions/docker-cache/restore.sh ${{ runner.temp }}/docker_cache/cache.tar
       - name: Build esy image
         run: |
-          docker build --rm -f "Dockerfile.ocaml" -t reasonnative/esy:${{ matrix.ESY_VERSION }} "."
+          docker build --rm -f "Dockerfile.ocaml" "."
       - name: Backup docker
         run: ./.github/actions/docker-cache/backup.sh ${{ runner.temp }}/docker_cache/cache.tar
