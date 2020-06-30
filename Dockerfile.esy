@@ -33,4 +33,4 @@ RUN apk add glibc-2.31-r0.apk
 
 ENV PATH=/esy/bin:$PATH
 
-echo FOO
+RUN echo FOO
