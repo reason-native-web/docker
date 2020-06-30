@@ -16,9 +16,12 @@ jobs:
         with:
           path: |
             /var/lib/docker
-          key: ${{ runner.os }}-test2
+          key: ${{ runner.os }}-test3
       - uses: actions/checkout@v2
       
       - name: Build esy image
         run: |
           DOCKER_BUILDKIT=1 docker build --rm -f "Dockerfile.esy" --build-arg ESY_VERSION=${{ matrix.ESY_VERSION }} -t reasonnative/esy:${{ matrix.ESY_VERSION }} "."
+      - name: Stupid 2
+        run: |
+          sudo chown -R $(whoami):$(id -ng) /var/lib/docker
