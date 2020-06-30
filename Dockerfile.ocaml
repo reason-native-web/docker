@@ -22,3 +22,5 @@ RUN echo ' \
 RUN cat esy.json
 
 RUN --mount=type=cache,target=~/.esy/ esy
+
+RUN echo foo
