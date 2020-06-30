@@ -12,7 +12,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ${{ runner.temp }}/docker_cache
-          key: test-5
+          key: test-6
       - uses: actions/checkout@v2
       - name: Restore docker
         run: ./.github/actions/docker-cache/restore.sh ${{ runner.temp }}/docker_cache/cache.tar
