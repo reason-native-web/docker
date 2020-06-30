@@ -32,3 +32,5 @@ RUN wget https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.31-r0/
 RUN apk add glibc-2.31-r0.apk
 
 ENV PATH=/esy/bin:$PATH
+
+echo FOO
