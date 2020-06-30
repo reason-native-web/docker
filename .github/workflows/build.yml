@@ -8,6 +8,9 @@ jobs:
       matrix:
         ESY_VERSION: ['0.6.2', '0.6.4']
     steps:
+      - name: Stupid
+        run: |
+          sudo chown -R $(whoami):$(id -ng) /var/lib/docker
       - name: Cache multiple paths
         uses: actions/cache@v2
         with:
@@ -19,8 +22,3 @@ jobs:
       - name: Build esy image
         run: |
           DOCKER_BUILDKIT=1 docker build --rm -f "Dockerfile.esy" --build-arg ESY_VERSION=${{ matrix.ESY_VERSION }} -t reasonnative/esy:${{ matrix.ESY_VERSION }} "."
-      - name: Move docker cache
-        run: |
-          # This is stupid
-          sudo mv /var/lib/docker ~/docker-cache
-          sudo chmod -R 777 ~/docker-cache
