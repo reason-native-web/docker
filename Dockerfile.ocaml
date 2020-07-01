@@ -55,7 +55,7 @@ RUN echo ' \
 
 RUN cat esy.json
 
-RUN echo aaaaa
+RUN echo a
 
 RUN --mount=type=cache,target=/root/.esy/ esy
 
