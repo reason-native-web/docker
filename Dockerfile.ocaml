@@ -1,5 +1,7 @@
 # syntax = docker/dockerfile:experimental
-FROM node:12
+FROM node:12-alpine
+
+ENV TERM=dumb LD_LIBRARY_PATH=/usr/local/lib:/usr/lib:/lib
 
 RUN npm install -g esy
 
