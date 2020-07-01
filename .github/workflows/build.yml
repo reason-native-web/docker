@@ -8,16 +8,23 @@ jobs:
   build-and-deploy-esy:
     runs-on: ubuntu-latest
     steps:
-      - name: Cache docker
-        uses: actions/cache@v2
-        with:
-          path: ${{ runner.temp }}/docker_cache
-          key: test-6
+      - name: Set up Docker Buildx
+        uses: crazy-max/ghaction-docker-buildx@v2
       - uses: actions/checkout@v2
-      - name: Restore docker
-        run: ./.github/actions/docker-cache/restore.sh ${{ runner.temp }}/docker_cache/cache.tar
-      - name: Build esy image
+      - name: Cache Docker layers
+        uses: actions/cache@v2
+        id: cache
+        with:
+          path: /tmp/.buildx-cache
+          key: ${{ runner.os }}-buildx-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-buildx-
+      - name: Docker Buildx (build)
         run: |
-          docker build --rm -f "Dockerfile.ocaml" "."
-      - name: Backup docker
-        run: ./.github/actions/docker-cache/backup.sh ${{ runner.temp }}/docker_cache/cache.tar
+          docker buildx build \
+            --cache-from "type=local,src=/tmp/.buildx-cache" \
+            --cache-to "type=local,dest=/tmp/.buildx-cache" \
+            --platform linux/386,linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64,linux/ppc64le,linux/s390x \
+            --output "type=image,push=false" \
+            --file ./Dockerfile.ocaml \
+            .

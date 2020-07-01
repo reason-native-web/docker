@@ -19,10 +19,12 @@ RUN echo ' \
     } \
     ' > esy.json
 
-RUN echo foo
-
 RUN cat esy.json
 
+Run echo boo
+
 RUN --mount=type=cache,target=/root/.esy/ esy
+
+RUN echo foo
 
 
