@@ -1,5 +1,7 @@
 # syntax = docker/dockerfile:experimental
-FROM reasonnative/esy:0.6.4
+FROM alpine-node:latest
+
+RUN npm install -g esy
 
 LABEL maintainer "Ulrik Strid <ulrik.strid@outlook.com>"
 

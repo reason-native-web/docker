@@ -3,7 +3,6 @@ on: [push]
 
 env:
   DOCKER_BUILDKIT: 1
-
 jobs:
   build-and-deploy-esy:
     runs-on: ubuntu-latest
@@ -27,4 +26,3 @@ jobs:
             --platform linux/386,linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64,linux/ppc64le,linux/s390x \
             --output "type=image,push=false" \
             --file ./Dockerfile.ocaml \
-            .
