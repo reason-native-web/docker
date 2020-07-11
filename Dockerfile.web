@@ -12,8 +12,9 @@ RUN echo ' \
     "name": "package-base", \
     "dependencies": { \
     "ocaml": "~'"$OCAML_VERSION"'", \
-    "@opam/dune": ">= 2.0.0", \
-    "@reason-native-web/morph": "^0.4.0" \
+    "@opam/dune": ">= 2.5.0", \
+    "@reason-native-web/morph": "^0.5.0", \
+    "@opam/jose": "^0.4.0" \
     } \
     } \
     ' > esy.json
