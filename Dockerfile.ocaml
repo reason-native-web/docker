@@ -1,4 +1,4 @@
-FROM reasonnative/esy:0.6.6
+FROM reasonnative/esy:0.6.7
 
 LABEL maintainer "Ulrik Strid <ulrik.strid@outlook.com>"
 

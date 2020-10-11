@@ -3,7 +3,7 @@ FROM node:12-alpine as build
 
 LABEL maintainer "Ulrik Strid <ulrik.strid@outlook.com>"
 
-ARG ESY_VERSION=0.6.6
+ARG ESY_VERSION=0.6.7
 
 ENV TERM=dumb LD_LIBRARY_PATH=/usr/local/lib:/usr/lib:/lib
 

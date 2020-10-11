@@ -9,10 +9,10 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        ESY_VERSION: ['0.6.2', '0.6.4', '0.6.6']
+        ESY_VERSION: ["0.6.7"]
     steps:
       - uses: actions/checkout@v2
-      
+
       - name: Build esy image
         run: |
           docker login --username ${{ secrets.DOCKER_USERNAME }} --password ${{ secrets.DOCKER_PASSWORD }}
@@ -24,10 +24,10 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        OCAML_VERSION: ['4.8.1', '4.9.0', '4.9.1', '4.10.0']  
+        OCAML_VERSION: ["4.8.1", "4.9.0", "4.9.1", "4.10.0"]
     steps:
       - uses: actions/checkout@v2
-      
+
       - name: Build esy image
         run: |
           docker login --username ${{ secrets.DOCKER_USERNAME }} --password ${{ secrets.DOCKER_PASSWORD }}
