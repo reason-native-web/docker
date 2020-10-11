@@ -15,6 +15,10 @@ RUN echo ' \
     "@opam/dune": ">= 2.5.0", \
     "@reason-native-web/morph": "^0.6.1", \
     "@opam/jose": "^0.5.0" \
+    }, \
+    "resolutions": { \
+    "@opam/conf-pkg-config": "esy-ocaml/yarn-pkg-config#db3a0b63883606dd57c54a7158d560d6cba8cd79", \
+    "@opam/session": "inhabitedtype/ocaml-session:session.opam#6180413" \
     } \
     } \
     ' > esy.json
