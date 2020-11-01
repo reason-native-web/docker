@@ -1,5 +1,6 @@
-ARG OCAML_VERSION=4.9.1
-FROM reasonnative/ocaml:$OCAML_VERSION
+ARG OCAML_VERSION=4.10.1
+ARG ESY_VERSION=0.6.7
+FROM reasonnative/ocaml:$OCAML_VERSION-$ESY_VERSION
 
 LABEL maintainer "Ulrik Strid <ulrik.strid@outlook.com>"
 

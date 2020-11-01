@@ -3,7 +3,7 @@ FROM node:12-alpine as build
 
 LABEL maintainer "Ulrik Strid <ulrik.strid@outlook.com>"
 
-ARG ESY_VERSION=0.6.7
+ARG ESY_VERSION=esy@0.6.7
 
 ENV TERM=dumb LD_LIBRARY_PATH=/usr/local/lib:/usr/lib:/lib
 
@@ -11,7 +11,7 @@ RUN mkdir /esy
 WORKDIR /esy
 
 ENV NPM_CONFIG_PREFIX=/esy
-RUN npm install -g --unsafe-perm esy@$ESY_VERSION
+RUN npm install -g --unsafe-perm $ESY_VERSION
 
 # now that we have esy installed we need a proper runtime
 # we should be able to use the esy install script in the future

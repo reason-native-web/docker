@@ -16,20 +16,35 @@ jobs:
       - name: Build esy image
         run: |
           docker login --username ${{ secrets.DOCKER_USERNAME }} --password ${{ secrets.DOCKER_PASSWORD }}
-          docker build --rm -f "Dockerfile.esy" --build-arg ESY_VERSION=${{ matrix.ESY_VERSION }} -t reasonnative/esy:${{ matrix.ESY_VERSION }} "."
+          docker build --rm -f "Dockerfile.esy" --build-arg ESY_VERSION=esy@${{ matrix.ESY_VERSION }} -t reasonnative/esy:${{ matrix.ESY_VERSION }} "."
           docker push reasonnative/esy:${{ matrix.ESY_VERSION }}
           docker logout
-  build-and-deploy:
-    needs: build-and-deploy-esy
+  build-and-deploy-esy-nightly:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        OCAML_VERSION: ["4.8.1", "4.9.0", "4.9.1", "4.10.0"]
+        ESY_VERSION: ["nightly"]
     steps:
       - uses: actions/checkout@v2
 
       - name: Build esy image
         run: |
           docker login --username ${{ secrets.DOCKER_USERNAME }} --password ${{ secrets.DOCKER_PASSWORD }}
-          ./build-and-push.sh ${{ matrix.OCAML_VERSION }}
+          docker build --rm -f "Dockerfile.esy" --build-arg ESY_VERSION=@esy-nightly/esy@0.6.8-f5cd5e -t reasonnative/esy:${{ matrix.ESY_VERSION }} "."
+          docker push reasonnative/esy:${{ matrix.ESY_VERSION }}
+          docker logout
+  build-and-deploy:
+    needs: [build-and-deploy-esy, build-and-deploy-esy-nightly]
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        OCAML_VERSION: ["4.9.0", "4.9.1", "4.10.1"]
+        ESY_VERSION: ["0.6.7", "nightly"]
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Build esy image
+        run: |
+          docker login --username ${{ secrets.DOCKER_USERNAME }} --password ${{ secrets.DOCKER_PASSWORD }}
+          ./build-and-push.sh ${{ matrix.OCAML_VERSION }} ${{ matrix.ESY_VERSION }}
           docker logout
