@@ -21,6 +21,4 @@ RUN echo ' \
 
 RUN cat esy.json
 
-RUN esy
-
-Run rm -rf /tmp/app
+RUN esy && rm -rf /tmp/app
